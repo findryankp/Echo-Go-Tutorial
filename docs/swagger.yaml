@@ -1,0 +1,305 @@
+definitions:
+  models.Player:
+    properties:
+      age:
+        type: integer
+      id:
+        type: integer
+      player_name:
+        type: string
+      position:
+        type: string
+    type: object
+  models.Team:
+    properties:
+      id:
+        type: integer
+      team_name:
+        type: string
+    type: object
+  models.TransactionPlayer:
+    properties:
+      age:
+        type: integer
+      id:
+        type: integer
+      id_player:
+        type: integer
+      id_team:
+        type: integer
+      player_name:
+        type: string
+      position:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /Players:
+    post:
+      description: Create Player .
+      parameters:
+      - description: the body to create a new Player
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Player'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Player'
+      summary: Create Player .
+      tags:
+      - Players
+  /players:
+    get:
+      description: Get a list of Players.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Player'
+            type: array
+      summary: Get All Players.
+      tags:
+      - Players
+  /players/{id}:
+    delete:
+      description: Delete a players by id.
+      parameters:
+      - description: id players
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      summary: Delete players.
+      tags:
+      - Players
+    get:
+      description: Get a Player from id.
+      parameters:
+      - description: id player
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Player'
+      summary: Get Player by ID.
+      tags:
+      - Players
+    put:
+      description: Update players .
+      parameters:
+      - description: the body to Update a players
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Player'
+      - description: id players
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Player'
+            type: array
+      summary: Update players .
+      tags:
+      - Players
+  /teams:
+    get:
+      description: Get a list of Teams.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Team'
+            type: array
+      summary: Get All Teams.
+      tags:
+      - Teams
+    post:
+      description: Create Team .
+      parameters:
+      - description: the body to create a new team
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Team'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Team'
+      summary: Create Team .
+      tags:
+      - Teams
+  /teams/{id}:
+    delete:
+      description: Delete a teams by id.
+      parameters:
+      - description: id team
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      summary: Delete teams.
+      tags:
+      - Teams
+    get:
+      description: Get a Team from id.
+      parameters:
+      - description: id team
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Team'
+      summary: Get Team by ID.
+      tags:
+      - Teams
+    put:
+      description: Update teams .
+      parameters:
+      - description: the body to Update a teams
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/models.Team'
+      - description: id teams
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Team'
+            type: array
+      summary: Update teams .
+      tags:
+      - Teams
+  /teams/{id}/player:
+    get:
+      description: Get a Team from id.
+      parameters:
+      - description: id team
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.TransactionPlayer'
+            type: array
+      summary: Lits Player From a Team.
+      tags:
+      - Teams
+  /teams/{id}/player/{idPlayer}:
+    delete:
+      description: Delete Player To A Team.
+      parameters:
+      - description: id Team
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: id Player
+        in: path
+        name: idPlayer
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Team'
+      summary: Delete Player To A Team.
+      tags:
+      - Teams
+    put:
+      description: Add Player To A Team.
+      parameters:
+      - description: id Team
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: id Player
+        in: path
+        name: idPlayer
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Team'
+      summary: Add Player To A Team.
+      tags:
+      - Teams
+swagger: "2.0"
